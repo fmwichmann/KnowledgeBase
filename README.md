@@ -8,16 +8,22 @@ Persönliche Wissensbasis — LLM-gestützt gepflegt und abgefragt.
 Architekturentscheidungen (ADRs): was wurde entschieden, warum, mit welchen Konsequenzen.
 Eine Datei pro Entscheidung — jede hat einen eigenen Lebenszyklus (Status, Nachfolger).
 
-Frontmatter: `id`, `title`, `status` (aktiv | ersetzt durch ADR-XXX), `date`
+Frontmatter: `id`, `title`, `status` (aktiv | ersetzt durch ADR-XXX), `date`, `links`
 Abschnitte: Kontext, Alternativen, Entscheidung, Konsequenzen
 
 ### requirements/
 Anforderungen an die Anwendung — minimal, priorisiert, erweiterbar.
-Alle Anforderungen in einer Datei: `requirements/requirements.md`
+Eine Datei pro Anforderung.
+
+Frontmatter: `id`, `title`, `priority` (mvp | mittelfristig | rahmenbedingung), `status` (aktiv | ersetzt durch REQ-XXX), `links`
+Inhalt: Eine Anforderung im SOPHIST MASTeR-Stil.
 
 ### how-to/
 Schritt-für-Schritt-Anleitungen für wiederkehrende Aufgaben.
 Eine Datei pro Thema.
+
+Frontmatter: `id`, `title`, `links`
+Abschnitte: Ziel, Voraussetzungen, Schritte
 
 ### notes/
 Lose Notizen, Rechercheergebnisse, Zwischenstände.
@@ -32,16 +38,26 @@ Abschnitte: Grundsatz, Begründung, Anwendung
 
 ## Dateiorganisation
 
-Die Granularität richtet sich nach Lebenszyklus und Zugriffsmuster des Inhalts:
+Jedes Dokument mit eigenem Lebenszyklus oder Verlinkungsbedarf erhält eine eigene Datei. Das stellt sicher, dass jedes Dokument als vollständiger, in sich geschlossener Chunk indexiert wird und gezielt verlinkt werden kann.
 
-- **Wartbarkeit:** Inhalte mit eigenem Lebenszyklus (Status, Nachfolger) erhalten eine eigene Datei, damit Änderungen isoliert vorgenommen werden können. Stabile, zusammengehörige Inhalte werden konsolidiert — weniger Dateien bedeuten weniger Pflegeaufwand.
-- **Zugriff:** Das LLM findet thematisch fokussierte Dateien zuverlässiger als große Mischdateien. Konsolidierung ist dort sinnvoll, wo Inhalte ohnehin gemeinsam abgefragt werden.
-- **Lesbarkeit:** Wenige, klar benannte Dateien sind für Menschen leichter zu überblicken als viele Kleinstdateien.
+- **Wartbarkeit:** Änderungen an einem Dokument betreffen nur seine eigene Datei. Das LLM kann Dokumente gezielt aktualisieren, ohne andere zu berühren.
+- **Zugriff:** Einzeldateien erzeugen saubere Chunks beim Indexieren — kein Inhalt wird durch Fragmentierung vom zugehörigen Kontext getrennt.
+- **Lesbarkeit:** Klare Benennung (`REQ-001-wissensaufnahme.md`) macht Inhalt ohne Öffnen der Datei erkennbar.
 
-| Verzeichnis    | Granularität         | Begründung                                              |
-|----------------|----------------------|---------------------------------------------------------|
-| `decisions/`   | Eine Datei pro ADR   | Eigener Lebenszyklus je Entscheidung (Status, Ersatz)   |
-| `requirements/`| Eine Datei gesamt    | Anforderungen gehören zusammen, überschaubares Volumen  |
-| `principles/`  | Eine Datei gesamt    | Wenige, stabile Grundsätze                              |
-| `how-to/`      | Eine Datei pro Thema | Anleitungen sind thematisch unabhängig                  |
-| `notes/`       | Nach Bedarf          | Lose Notizen, kein festes Schema                        |
+| Verzeichnis    | Granularität              | Begründung                                                  |
+|----------------|---------------------------|-------------------------------------------------------------|
+| `decisions/`   | Eine Datei pro ADR        | Eigener Lebenszyklus je Entscheidung (Status, Ersatz)       |
+| `requirements/`| Eine Datei pro Anforderung| Saubere Chunks, gezielte Verlinkung, eigener Lebenszyklus   |
+| `principles/`  | Eine Datei gesamt         | Wenige, stabile Grundsätze ohne eigenen Lebenszyklus        |
+| `how-to/`      | Eine Datei pro Thema      | Anleitungen sind thematisch unabhängig                      |
+| `notes/`       | Nach Bedarf               | Lose Notizen, kein festes Schema                            |
+
+## Verlinkung
+
+Dokumente verweisen auf verwandte Dokumente über das `links`-Feld im YAML-Frontmatter. Links werden in beide Richtungen gepflegt. Das LLM aktualisiert beim Anlegen oder Verknüpfen von Dokumenten stets beide Seiten.
+
+```yaml
+links:
+  - ADR-001
+  - HOW-002
+```

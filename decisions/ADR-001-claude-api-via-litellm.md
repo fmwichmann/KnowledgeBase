@@ -3,6 +3,9 @@ id: ADR-001
 title: Nutzung der Claude API über LiteLLM als generisches LLM-Interface
 status: aktiv
 date: 2026-05-15
+links:
+  - REQ-006
+  - REQ-007
 ---
 
 ## Kontext
