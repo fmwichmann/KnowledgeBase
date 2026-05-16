@@ -2,4 +2,4 @@
 
 ## Offene Punkte
 
-- Konfiguriere Claude-Berechtigungen
+- **OP-001** Konfiguriere Claude-Berechtigungen
