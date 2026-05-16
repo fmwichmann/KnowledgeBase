@@ -40,7 +40,7 @@ Jede Datei enthält einen YAML-Header mit Metadaten. Nicht alle Felder sind für
 | `title`    | Freitext                                    | Alle                          | Menschenlesbare Bezeichnung des Dokuments.                                |
 | `status`   | `aktiv` \| `ersetzt durch XXX`              | decisions, requirements       | Zeigt an, ob das Dokument noch gültig ist oder durch ein anderes ersetzt wurde. |
 | `date`     | `YYYY-MM-DD`                                | decisions                     | Datum der Entscheidung.                                                   |
-| `priority` | `mvp` \| `mittelfristig` \| `rahmenbedingung` | requirements                | **mvp**: zwingend für den ersten funktionsfähigen Stand. **mittelfristig**: geplant, aber kein Blocker. **rahmenbedingung**: technische oder organisatorische Vorgabe ohne Umsetzungsreihenfolge. |
+| `priority` | `muss` \| `soll` \| `kann`                    | requirements                | Spiegelt das Modalverb im Anforderungssatz: **muss** = zwingend, **soll** = gefordert aber kein Blocker, **kann** = optional. |
 | `links`    | Liste von IDs: `[ADR-001, REQ-002]`         | Alle                          | Verweise auf inhaltlich verwandte Dokumente. Werden in beide Richtungen gepflegt. |
 
 ## Dateiorganisation
