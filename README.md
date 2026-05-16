@@ -18,3 +18,9 @@ Schritt-für-Schritt-Anleitungen für wiederkehrende Aufgaben.
 
 ### notes/
 Lose Notizen, Rechercheergebnisse, Zwischenstände.
+
+### principles/
+Grundsätze zur Organisation und Pflege der Wissensbasis — was gute Wissensdokumentation ausmacht und welche Regeln beim Anlegen von Inhalten gelten.
+
+Frontmatter: `id`, `title`
+Abschnitte: Grundsatz, Begründung, Anwendung
