@@ -6,13 +6,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Remote: https://github.com/fmwichmann/KnowledgeBase
 
-## Autonomous Commit & Push Workflow
+## Autonomous Commit Workflow
 
-After every meaningful change (new file, edit, deletion), Claude Code commits and pushes automatically so the full history is on GitHub and any state can be restored.
+After every meaningful change (new file, edit, deletion), Claude Code commits automatically. Push requires manual approval by the user.
 
 **Rules:**
 - Commit after every change — do not batch unrelated changes into one commit
-- Always push immediately after committing (`git push origin main`)
+- Do not push automatically — ask the user before pushing
 - Write concise commit messages that describe what changed and why
 - Never use `--no-verify` or force-push to main
 
@@ -20,13 +20,12 @@ After every meaningful change (new file, edit, deletion), Claude Code commits an
 ```
 git add <changed-files>
 git commit -m "short description"
-git push origin main
+# Push only after user approval
 ```
 
 **To revert a specific commit:**
 ```
 git revert <commit-hash>
-git push origin main
 ```
 
 **To view history:**
