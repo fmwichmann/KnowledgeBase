@@ -32,6 +32,12 @@ Abschnitte: Grundsatz, Begründung, Anwendung
 
 ## Dateiorganisation
 
+Die Granularität richtet sich nach Lebenszyklus und Zugriffsmuster des Inhalts:
+
+- **Wartbarkeit:** Inhalte mit eigenem Lebenszyklus (Status, Nachfolger) erhalten eine eigene Datei, damit Änderungen isoliert vorgenommen werden können. Stabile, zusammengehörige Inhalte werden konsolidiert — weniger Dateien bedeuten weniger Pflegeaufwand.
+- **Zugriff:** Das LLM findet thematisch fokussierte Dateien zuverlässiger als große Mischdateien. Konsolidierung ist dort sinnvoll, wo Inhalte ohnehin gemeinsam abgefragt werden.
+- **Lesbarkeit:** Wenige, klar benannte Dateien sind für Menschen leichter zu überblicken als viele Kleinstdateien.
+
 | Verzeichnis    | Granularität         | Begründung                                              |
 |----------------|----------------------|---------------------------------------------------------|
 | `decisions/`   | Eine Datei pro ADR   | Eigener Lebenszyklus je Entscheidung (Status, Ersatz)   |
